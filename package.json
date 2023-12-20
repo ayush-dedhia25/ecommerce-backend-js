@@ -1,0 +1,29 @@
+{
+	"name": "ecommerce-backend",
+	"version": "1.0.0",
+	"description": "Backend for my ecommerce app.",
+	"main": "src/index.js",
+	"type": "module",
+	"scripts": {
+		"dev": "nodemon ./src/index.js",
+		"start": "node ./src/index.js"
+	},
+	"keywords": [
+		"express",
+		"backend",
+		"ecommerce"
+	],
+	"author": "Ayush Dedhia <ayushdedhia25@gmail.com>",
+	"license": "ISC",
+	"dependencies": {
+		"bcrypt": "^5.1.1",
+		"dotenv": "^16.3.1",
+		"express": "^4.18.2",
+		"jsonwebtoken": "^9.0.2",
+		"mongoose": "^8.0.3",
+		"zod": "^3.22.4"
+	},
+	"devDependencies": {
+		"nodemon": "^3.0.2"
+	}
+}

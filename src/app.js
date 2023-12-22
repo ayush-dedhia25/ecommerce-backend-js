@@ -1,8 +1,10 @@
 import express from "express";
 
-import ApiError from "./lib/ApiError.js";
-import userRoutes from "./routes/user.routes.js";
-
+/**
+ * Express Server
+ *
+ * @type {import("express").Application}
+ */
 const app = express();
 
 // Configure express server
@@ -14,19 +16,15 @@ app.get("/api/v1/test-end", (req, res) => {
 	res.status(200).json({ ping: "pong" });
 });
 
+import errorHandler from "./lib/error-handler.js";
+import authRoutes from "./routes/auth.routes.js";
+import userRoutes from "./routes/user.routes.js";
+
+// Routes
+app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/users", userRoutes);
 
-app.use((err, req, res, next) => {
-	// Handle ApiError
-	if (err instanceof ApiError) {
-		return res.status(err.statusCode).json(err.toJson());
-	}
-	// Handle miscellaneous errors
-	return res.status(err.statusCode || 500).json({
-		statusCode: err.statusCode || 500,
-		data: null,
-		message: err.message,
-	});
-});
+// Global error handler
+app.use(errorHandler);
 
 export default app;

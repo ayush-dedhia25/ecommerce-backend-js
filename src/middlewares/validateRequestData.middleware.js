@@ -11,7 +11,7 @@ const validateRequestData = (schema) => {
 		// Return validation error response
 		if (!input.success) {
 			const details = input.error.issues.reduce((acc, issue) => {
-				const fieldName = issue.path[0];
+				const fieldName = issue.path[1];
 				acc[fieldName] = issue.message;
 				return acc;
 			}, {});

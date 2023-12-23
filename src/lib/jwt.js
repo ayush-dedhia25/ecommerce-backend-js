@@ -1,24 +1,24 @@
-import jwt from "jsonwebtoken";
-import Config from "./config.js";
+import User from "../models/User.model.js";
+import ApiError from "./ApiError.js";
 
-const ALGORITHM = Config.jwt.algorithm;
+const generateTokens = async (userId) => {
+	try {
+		const user = await User.findById(userId);
+		console.log("🚀 ~ file: jwt.js:30 ~ generateTokens ~ user:", user);
+		const accessToken = user.generateAccessToken();
+		const refreshToken = user.generateRefreshToken();
 
-const generateJWTAccessToken = (payload) => {
-	const accessTokenSecret = Config.jwt.accessTokenSecret;
-	const accessTokenExpiry = Config.jwt.accessTokenExpiry;
+		user.refreshToken = refreshToken;
+		void (await user.save());
 
-	return jwt.sign(payload, accessTokenSecret, {
-		expiresIn: accessTokenExpiry,
-	});
+		return { accessToken, refreshToken };
+	} catch (error) {
+		console.log("🚀 ~ file: jwt.js:38 ~ generateTokens ~ error:", error);
+		throw new ApiError(
+			500,
+			"Something went wrong while generating access tokens"
+		);
+	}
 };
 
-const generateJWTRefreshToken = (payload) => {
-	const refreshTokenSecret = Config.jwt.refreshTokenSecret;
-	const refreshTokenExpiry = Config.jwt.refreshTokenExpiry;
-
-	return jwt.sign(payload, refreshTokenSecret, {
-		expiresIn: refreshTokenExpiry,
-	});
-};
-
-export { generateJWTAccessToken, generateJWTRefreshToken };
+export { generateTokens };

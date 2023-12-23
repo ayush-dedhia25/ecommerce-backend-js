@@ -63,4 +63,8 @@ const deleteUser = asyncHandler(async (req, res) => {
 	return res.status(204).json();
 });
 
-export { createUser, deleteUser, getAllUsers, updateUser };
+const getActiveUser = asyncHandler((req, res) => {
+	return res.status(200).json(new ApiResponse(200, req.user));
+});
+
+export { createUser, deleteUser, getActiveUser, getAllUsers, updateUser };

@@ -1,13 +1,7 @@
 import jwt from "jsonwebtoken";
 
-import {
-	ApiError,
-	ApiResponse,
-	asyncHandler,
-	Config,
-	generateTokens,
-} from "../lib/index.js";
-import User from "../models/User.model.js";
+import { ApiError, ApiResponse, asyncHandler, Config, generateTokens } from "#lib/index";
+import User from "#models/User.model";
 
 const login = asyncHandler(async (req, res) => {
 	const { body } = req.parsedCtx;
@@ -26,9 +20,7 @@ const login = asyncHandler(async (req, res) => {
 
 	// Generate tokens for the further requests
 	const { accessToken, refreshToken } = await generateTokens(user._id);
-	const loggedInUser = await User.findById(user._id).select(
-		"-password -salt -refreshToken -__v"
-	);
+	const loggedInUser = await User.findById(user._id).select("-password -salt -refreshToken -__v");
 
 	return res.status(200).json(
 		new ApiResponse(
@@ -45,18 +37,14 @@ const login = asyncHandler(async (req, res) => {
 
 const refreshToken = asyncHandler(async (req, res) => {
 	// Get the existing refresh token from the client via cookies or body
-	const refreshTokenFromRequest =
-		req.cookies?.refreshToken || req.body.refresh_token;
+	const refreshTokenFromRequest = req.cookies?.refreshToken || req.body.refresh_token;
 	if (!refreshTokenFromRequest) {
 		throw new ApiError(401, "Unauthorized access");
 	}
 
 	try {
 		// Verify the refresh token
-		const decodedToken = jwt.verify(
-			refreshTokenFromRequest,
-			Config.Jwt.RefreshTokenSecret
-		);
+		const decodedToken = jwt.verify(refreshTokenFromRequest, Config.Jwt.RefreshTokenSecret);
 
 		// Find the user with the refresh token info
 		const user = await User.findById(decodedToken?.id);

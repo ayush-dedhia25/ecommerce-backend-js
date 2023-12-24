@@ -16,9 +16,9 @@ app.get("/ping", (req, res) => {
 	res.status(200).json({ message: "pong" });
 });
 
-import { globalErrorHandler, jwtErrorHandler } from "./error-handlers/index.js";
-import authRoutes from "./routes/auth.routes.js";
-import userRoutes from "./routes/user.routes.js";
+import { globalErrorHandler, jwtErrorHandler } from "#error-handlers/index";
+import authRoutes from "#routes/auth.routes";
+import userRoutes from "#routes/user.routes";
 
 // Routes
 app.use("/api/v1/auth", authRoutes);

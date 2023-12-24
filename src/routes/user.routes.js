@@ -1,16 +1,8 @@
 import { Router } from "express";
 
-import {
-	deleteUser,
-	getActiveUser,
-	getAllUsers,
-	updateUser,
-} from "../controllers/user.controller.js";
-import { validateRequest, verifyJWT } from "../middlewares/index.js";
-import {
-	deleteUserSchema,
-	updateUserSchema,
-} from "../validators/user.validator.js";
+import { deleteUser, getActiveUser, getAllUsers, updateUser } from "#controllers/user.controller";
+import { validateRequest, verifyJWT } from "#middlewares/index";
+import { deleteUserSchema, updateUserSchema } from "#validators/user.validator";
 
 /**
  * Express Router - for the user routes.

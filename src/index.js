@@ -1,5 +1,5 @@
+import { Config, connectToMongoDB } from "#lib/index";
 import app from "./app.js";
-import { Config, connectToMongoDB } from "./lib/index.js";
 
 (async function () {
 	// Connect to the mongodb database
@@ -19,12 +19,7 @@ import { Config, connectToMongoDB } from "./lib/index.js";
 
 	// Handle Unhandled promise rejections thrown by the server
 	process.on("unhandledRejection", (reason, promise) => {
-		console.log(
-			"Encountered Unhandled Rejection at:",
-			promise,
-			"reason:",
-			reason
-		);
+		console.log("Encountered Unhandled Rejection at:", promise, "reason:", reason);
 		process.exit(1);
 	});
 })();

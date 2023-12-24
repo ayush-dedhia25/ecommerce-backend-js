@@ -5,12 +5,8 @@ dotenv.config({});
 
 /**
  * Application configuration settings.
- *
  */
 class Config {
-	static appVersion = process.env.APP_VERSION || "1.0";
-	static nodeEnvironment = process.env.NODE_ENV || "development";
-
 	// App Configuration
 	static App = {
 		Version: process.env.APP_VERSION || "1.0",
@@ -30,9 +26,6 @@ class Config {
 	static Database = {
 		Uri: process.env.DATABASE_URL || "",
 	};
-
-	static mongoURI = process.env.DATABASE_URL;
-	static serverPort = process.env.PORT || 3000;
 }
 
 export default Config;

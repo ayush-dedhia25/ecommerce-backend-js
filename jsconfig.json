@@ -1,0 +1,17 @@
+{
+	"compilerOptions": {
+		"baseUrl": ".",
+		"paths": {
+			"#controllers/*": ["./src/controllers/*.js"],
+			"#error-handlers/*": ["./src/error-handlers/*.js"],
+			"#lib/*": ["./src/lib/*.js"],
+			"#middlewares/*": ["./src/middlewares/*.js"],
+			"#models/*": ["./src/models/*.js"],
+			"#routes/*": ["./src/routes/*.js"],
+			"#utils/*": ["./src/utils/*.js"],
+			"#validators/*": ["./src/validators/*.js"]
+		}
+	},
+	"include": ["src"],
+	"exclude": ["node_modules"]
+}

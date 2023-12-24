@@ -1,14 +1,13 @@
 import jwt from "jsonwebtoken";
 
-import { ApiError, asyncHandler, Config } from "../lib/index.js";
-import User from "../models/User.model.js";
+import { ApiError, asyncHandler, Config } from "#lib/index";
+import User from "#models/User.model";
 
 const verifyJWT = asyncHandler(async (req, res, next) => {
 	try {
 		// Extract the token from the cookie or request headers
 		const token =
-			req.cookies?.access_token ||
-			req.header("Authorization")?.replace("Bearer ", "");
+			req.cookies?.access_token || req.header("Authorization")?.replace("Bearer ", "");
 		if (!token) {
 			throw new ApiError(401, "Unauthorized request");
 		}

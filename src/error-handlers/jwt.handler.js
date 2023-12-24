@@ -1,16 +1,12 @@
 import jwt from "jsonwebtoken";
 
-import ApiError from "../lib/ApiError.js";
+import ApiError from "#lib/ApiError";
 
 const jwtErrorHandler = (err, req, res, next) => {
 	const errorResponder = (error) => {
 		if (error instanceof jwt.JsonWebTokenError) {
 			if (err.message === "jwt malformed") {
-				return new ApiError(
-					401,
-					"Unauthorized Access",
-					"Malformed token provided"
-				);
+				return new ApiError(401, "Unauthorized Access", "Malformed token provided");
 			} else if (err.message === "invalid signature") {
 				return new ApiError(
 					401,
@@ -18,17 +14,10 @@ const jwtErrorHandler = (err, req, res, next) => {
 					"Seems like the token has been tempered, please check or login again to issue a new token"
 				);
 			} else {
-				return new ApiError(
-					401,
-					"Unauthorized Access",
-					"Invalid token provided"
-				);
+				return new ApiError(401, "Unauthorized Access", "Invalid token provided");
 			}
 		} else if (error instanceof jwt.TokenExpiredError) {
-			return new ApiError(
-				401,
-				"Token is expired, please issue a new access token"
-			);
+			return new ApiError(401, "Token is expired, please issue a new access token");
 		}
 	};
 

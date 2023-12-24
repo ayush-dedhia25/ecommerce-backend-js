@@ -26,5 +26,15 @@
 	},
 	"devDependencies": {
 		"nodemon": "^3.0.2"
+	},
+	"imports": {
+		"#controllers/*": "./src/controllers/*.js",
+		"#error-handlers/*": "./src/error-handlers/*.js",
+		"#lib/*": "./src/lib/*.js",
+		"#middlewares/*": "./src/middlewares/*.js",
+		"#models/*": "./src/models/*.js",
+		"#routes/*": "./src/routes/*.js",
+		"#utils/*": "./src/utils/*.js",
+		"#validators/*": "./src/validators/*.js"
 	}
 }

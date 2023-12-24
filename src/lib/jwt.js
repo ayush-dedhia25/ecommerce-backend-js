@@ -1,4 +1,4 @@
-import User from "../models/User.model.js";
+import User from "#models/User.model";
 import ApiError from "./ApiError.js";
 
 const generateTokens = async (userId) => {
@@ -12,10 +12,7 @@ const generateTokens = async (userId) => {
 
 		return { accessToken, refreshToken };
 	} catch (error) {
-		throw new ApiError(
-			500,
-			"Something went wrong while generating access tokens"
-		);
+		throw new ApiError(500, "Something went wrong while generating access tokens");
 	}
 };
 

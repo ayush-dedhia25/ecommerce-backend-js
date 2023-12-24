@@ -6,6 +6,11 @@ import validateRequestData from "../middlewares/validateRequestData.middleware.j
 import { loginSchema } from "../validators/auth.validator.js";
 import { createUserSchema } from "../validators/user.validator.js";
 
+/**
+ * Express Router - for the auth routes.
+ *
+ * @type {Router}
+ */
 const router = Router();
 
 router.route("/login").post(validateRequestData(loginSchema), login);

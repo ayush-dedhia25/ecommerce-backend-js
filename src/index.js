@@ -1,11 +1,5 @@
-import dotenv from "dotenv";
-
 import app from "./app.js";
-import Config from "./lib/config.js";
-import connectToMongoDB from "./lib/connect.js";
-
-// Configure environment variables
-dotenv.config({});
+import { Config, connectToMongoDB } from "./lib/index.js";
 
 (async function () {
 	// Connect to the mongodb database

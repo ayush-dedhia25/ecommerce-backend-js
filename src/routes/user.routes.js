@@ -6,17 +6,21 @@ import {
 	getAllUsers,
 	updateUser,
 } from "../controllers/user.controller.js";
-import verifyJwt from "../middlewares/auth.middleware.js";
-import validateRequest from "../middlewares/validateRequestData.middleware.js";
+import { validateRequest, verifyJWT } from "../middlewares/index.js";
 import {
 	deleteUserSchema,
 	updateUserSchema,
 } from "../validators/user.validator.js";
 
+/**
+ * Express Router - for the user routes.
+ *
+ * @type {Router}
+ */
 const router = Router();
 
-router.route("/").get(verifyJwt, getAllUsers);
-router.route("/me").get(verifyJwt, getActiveUser);
+router.route("/").get(verifyJWT, getAllUsers);
+router.route("/me").get(verifyJWT, getActiveUser);
 router
 	.route("/:id")
 	.patch(validateRequest(updateUserSchema), updateUser)

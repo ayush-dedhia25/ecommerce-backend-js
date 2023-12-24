@@ -1,10 +1,12 @@
 import jwt from "jsonwebtoken";
 
-import ApiError from "../lib/ApiError.js";
-import ApiResponse from "../lib/ApiResponse.js";
-import asyncHandler from "../lib/asyncHandler.js";
-import Config from "../lib/config.js";
-import { generateTokens } from "../lib/jwt.js";
+import {
+	ApiError,
+	ApiResponse,
+	asyncHandler,
+	Config,
+	generateTokens,
+} from "../lib/index.js";
 import User from "../models/User.model.js";
 
 const login = asyncHandler(async (req, res) => {

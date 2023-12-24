@@ -1,14 +1,16 @@
 import * as bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 import Config from "../lib/config.js";
 
+/** @type {Schema} */
 const userSchema = new mongoose.Schema(
 	{
 		username: {
 			type: String,
 			required: true,
+			lowercase: true,
 		},
 		email: {
 			type: String,
@@ -47,6 +49,7 @@ userSchema.pre("save", async function (next) {
 userSchema.methods.sanitize = function () {
 	const user = this.toObject();
 	delete user.password;
+	delete user.refreshToken;
 	delete user.salt;
 	delete user.__v;
 	return user;

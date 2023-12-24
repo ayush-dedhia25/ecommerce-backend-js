@@ -12,11 +12,11 @@ app.use(express.json({ limit: "16kb" }));
 app.use(express.urlencoded({ extended: true, limit: "16kb" }));
 
 // Test server endpoint
-app.get("/api/v1/test-end", (req, res) => {
-	res.status(200).json({ ping: "pong" });
+app.get("/ping", (req, res) => {
+	res.status(200).json({ message: "pong" });
 });
 
-import errorHandler from "./lib/error-handler.js";
+import { globalErrorHandler, jwtErrorHandler } from "./error-handlers/index.js";
 import authRoutes from "./routes/auth.routes.js";
 import userRoutes from "./routes/user.routes.js";
 
@@ -24,7 +24,8 @@ import userRoutes from "./routes/user.routes.js";
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/users", userRoutes);
 
-// Global error handler
-app.use(errorHandler);
+// Register all the error handlers
+app.use(jwtErrorHandler); // Jwt specific error handler
+app.use(globalErrorHandler); // Global error handler
 
 export default app;

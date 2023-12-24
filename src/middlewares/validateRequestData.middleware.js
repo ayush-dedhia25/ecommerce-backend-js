@@ -15,6 +15,7 @@ const validateRequest = (schema) => {
 				acc[fieldName] = issue.message;
 				return acc;
 			}, {});
+
 			const error = new ApiError(400, "Validation failed", details);
 			return res.status(error.statusCode).json(error.toJson());
 		}

@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 
-// Parse and load the environment variables
+// Configure environment variables
 dotenv.config({});
 
 class Config {

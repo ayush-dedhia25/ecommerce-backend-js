@@ -6,7 +6,7 @@ import { Config, connectToMongoDB } from "./lib/index.js";
 	await connectToMongoDB();
 
 	// Start the server
-	const PORT = Config.serverPort;
+	const PORT = Config.App.Port;
 	app.listen(PORT, () => {
 		console.log(`🚀 Server up and running at http://localhost:${PORT}/`);
 	});

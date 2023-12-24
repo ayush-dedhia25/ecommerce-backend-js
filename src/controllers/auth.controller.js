@@ -55,7 +55,7 @@ const refreshToken = asyncHandler(async (req, res) => {
 		// Verify the refresh token
 		const decodedToken = jwt.verify(
 			refreshTokenFromRequest,
-			Config.jwt.refreshTokenSecret
+			Config.Jwt.RefreshTokenSecret
 		);
 
 		// Find the user with the refresh token info

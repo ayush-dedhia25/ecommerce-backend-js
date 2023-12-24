@@ -14,7 +14,7 @@ const verifyJWT = asyncHandler(async (req, res, next) => {
 		}
 
 		// Decode the token and access the user info
-		const decodedToken = jwt.verify(token, Config.jwt.accessTokenSecret);
+		const decodedToken = jwt.verify(token, Config.Jwt.AccessTokenSecret);
 
 		// Find the user in the database
 		const user = await User.findById(decodedToken?.id).select(

@@ -65,9 +65,9 @@ userSchema.methods.generateAccessToken = function () {
 			id: this._id,
 			email: this.email,
 		},
-		Config.jwt.accessTokenSecret,
+		Config.Jwt.AccessTokenSecret,
 		{
-			expiresIn: Config.jwt.accessTokenExpiry,
+			expiresIn: Config.Jwt.AccessTokenExpiry,
 		}
 	);
 };
@@ -78,9 +78,9 @@ userSchema.methods.generateRefreshToken = function () {
 			id: this._id,
 			email: this.email,
 		},
-		Config.jwt.refreshTokenSecret,
+		Config.Jwt.RefreshTokenSecret,
 		{
-			expiresIn: Config.jwt.refreshTokenExpiry,
+			expiresIn: Config.Jwt.RefreshTokenExpiry,
 		}
 	);
 };

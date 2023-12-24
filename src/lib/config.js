@@ -3,17 +3,32 @@ import dotenv from "dotenv";
 // Configure environment variables
 dotenv.config({});
 
+/**
+ * Application configuration settings.
+ *
+ */
 class Config {
 	static appVersion = process.env.APP_VERSION || "1.0";
 	static nodeEnvironment = process.env.NODE_ENV || "development";
 
+	// App Configuration
+	static App = {
+		Version: process.env.APP_VERSION || "1.0",
+		Environment: process.env.NODE_ENV || "development",
+		Port: process.env.PORT || 3000,
+	};
+
 	// JWT Configuration
-	static jwt = {
-		accessTokenSecret: process.env.ACCESS_TOKEN_SECRET || "My_Token_Secret",
-		accessTokenExpiry: process.env.ACCESS_TOKEN_EXPIRATION || "1h",
-		refreshTokenSecret: process.env.REFRESH_TOKEN_SECRET || "My_Token_Secret",
-		refreshTokenExpiry: process.env.REFRESH_TOKEN_EXPIRATION || "3d",
-		algorithm: process.env.JWT_ALGORITHM || "RS256",
+	static Jwt = {
+		AccessTokenSecret: process.env.ACCESS_TOKEN_SECRET || "My_Token_Secret",
+		AccessTokenExpiry: process.env.ACCESS_TOKEN_EXPIRATION || "1h",
+		RefreshTokenSecret: process.env.REFRESH_TOKEN_SECRET || "My_Token_Secret",
+		RefreshTokenExpiry: process.env.REFRESH_TOKEN_EXPIRATION || "3d",
+		Algorithm: process.env.JWT_ALGORITHM || "RS256",
+	};
+
+	static Database = {
+		Uri: process.env.DATABASE_URL || "",
 	};
 
 	static mongoURI = process.env.DATABASE_URL;

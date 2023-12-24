@@ -7,7 +7,7 @@ let instance = null;
 const connectToMongoDB = async () => {
 	try {
 		if (!instance) {
-			const mongoDBUrl = Config.mongoURI;
+			const mongoDBUrl = Config.Database.Uri;
 			instance = await mongoose.connect(mongoDBUrl);
 		}
 

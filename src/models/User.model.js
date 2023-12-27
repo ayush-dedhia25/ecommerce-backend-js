@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 
 import Config from "#lib/config";
+import { UserRoles } from "#utils/enums.utils";
 
 const userSchema = new mongoose.Schema(
 	{
@@ -29,6 +30,11 @@ const userSchema = new mongoose.Schema(
 		profile: {
 			type: mongoose.Types.ObjectId,
 			ref: "Profile",
+		},
+		role: {
+			type: String,
+			enum: Object.values(UserRoles),
+			default: UserRoles.User,
 		},
 	},
 	{ timestamps: true }
@@ -67,6 +73,7 @@ userSchema.methods.generateAccessToken = function () {
 		{
 			id: this._id,
 			email: this.email,
+			role: this.role,
 		},
 		Config.Jwt.AccessTokenSecret,
 		{
@@ -80,6 +87,7 @@ userSchema.methods.generateRefreshToken = function () {
 		{
 			id: this._id,
 			email: this.email,
+			role: this.role,
 		},
 		Config.Jwt.RefreshTokenSecret,
 		{

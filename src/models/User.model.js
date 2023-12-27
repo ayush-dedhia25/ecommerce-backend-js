@@ -1,10 +1,9 @@
 import * as bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import mongoose, { Schema } from "mongoose";
+import mongoose from "mongoose";
 
 import Config from "#lib/config";
 
-/** @type {Schema} */
 const userSchema = new mongoose.Schema(
 	{
 		username: {
@@ -26,6 +25,10 @@ const userSchema = new mongoose.Schema(
 		},
 		salt: {
 			type: String,
+		},
+		profile: {
+			type: mongoose.Types.ObjectId,
+			ref: "Profile",
 		},
 	},
 	{ timestamps: true }

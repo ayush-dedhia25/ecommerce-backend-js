@@ -2,9 +2,9 @@ import { Router } from "express";
 
 import { login, refreshToken } from "#controllers/auth.controller";
 import { createUser } from "#controllers/user.controller";
-import validateRequestData from "#middlewares/validateRequestData.middleware";
-import { loginSchema } from "#validators/auth.validator";
-import { createUserSchema } from "#validators/user.validator";
+import validateRequestData from "#middlewares/validateRequest.middleware";
+import { loginSchema } from "#schemas/auth.schema";
+import { createUserSchema } from "#schemas/user.schema";
 
 /**
  * Express Router - for the auth routes.

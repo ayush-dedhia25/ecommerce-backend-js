@@ -35,6 +35,6 @@
 		"#models/*": "./src/models/*.js",
 		"#routes/*": "./src/routes/*.js",
 		"#utils/*": "./src/utils/*.js",
-		"#validators/*": "./src/validators/*.js"
+		"#schemas/*": "./src/schemas/*.js"
 	}
 }

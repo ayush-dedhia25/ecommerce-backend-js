@@ -1,4 +1,4 @@
 import verifyJWT from "./auth.middleware.js";
-import validateRequest from "./validateRequest.middleware.js";
+import validateRequestInput from "./validateRequest.middleware.js";
 
-export { validateRequest, verifyJWT };
+export { validateRequestInput, verifyJWT };

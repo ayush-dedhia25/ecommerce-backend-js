@@ -1,11 +1,11 @@
 import { Router } from "express";
 
 import { deleteUser, getActiveUser, getAllUsers, updateUser } from "#controllers/user.controller";
-import { validateRequest, verifyJWT } from "#middlewares/index";
+import { validateRequestInput, verifyJWT } from "#middlewares/index";
 import { deleteUserSchema, updateUserSchema } from "#schemas/user.schema";
 
 /**
- * Express Router - for the user routes.
+ * User Router
  *
  * @type {Router}
  */
@@ -15,7 +15,7 @@ router.route("/").get(verifyJWT, getAllUsers);
 router.route("/me").get(verifyJWT, getActiveUser);
 router
 	.route("/:id")
-	.patch(validateRequest(updateUserSchema), updateUser)
-	.delete(validateRequest(deleteUserSchema), deleteUser);
+	.patch(validateRequestInput(updateUserSchema), updateUser)
+	.delete(validateRequestInput(deleteUserSchema), deleteUser);
 
 export default router;

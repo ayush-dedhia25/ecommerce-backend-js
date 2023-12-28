@@ -6,7 +6,7 @@ import {
 	getProfile,
 	updateProfile,
 } from "#controllers/profile.controller";
-import { validateRequest, verifyJWT } from "#middlewares/index";
+import { validateRequestInput, verifyJWT } from "#middlewares/index";
 import {
 	createProfileSchema,
 	deleteProfileSchema,
@@ -23,11 +23,11 @@ const router = Router();
 router
 	.route("/")
 	.get(verifyJWT, getProfile)
-	.post(verifyJWT, validateRequest(createProfileSchema), createProfile);
+	.post(verifyJWT, validateRequestInput(createProfileSchema), createProfile);
 
 router
 	.route("/:profileId")
-	.patch(verifyJWT, validateRequest(updateProfileSchema), updateProfile)
-	.delete(verifyJWT, validateRequest(deleteProfileSchema), deleteProfile);
+	.patch(verifyJWT, validateRequestInput(updateProfileSchema), updateProfile)
+	.delete(verifyJWT, validateRequestInput(deleteProfileSchema), deleteProfile);
 
 export default router;

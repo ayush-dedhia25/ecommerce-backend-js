@@ -1,7 +1,6 @@
 import { z } from "zod";
 
 const createUserSchema = z.object({
-	params: z.object({}),
 	body: z.object({
 		username: z.string({ required_error: "Username must not be empty" }),
 		email: z
@@ -22,7 +21,6 @@ const updateUserSchema = z
 
 const deleteUserSchema = z.object({
 	params: z.object({ id: z.string() }),
-	body: z.object({}),
 });
 
 export { createUserSchema, deleteUserSchema, updateUserSchema };

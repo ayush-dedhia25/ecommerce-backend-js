@@ -5,6 +5,7 @@ const profileSchema = z.object({
 	lastName: z.string({ required_error: "Please provide your last name" }).trim(),
 	addressLine1: z.string({ required_error: "Please provide your address" }).trim(),
 	addressLine2: z.string().trim().optional(),
+	landmark: z.string().trim().optional(),
 	pincode: z
 		.string()
 		.trim()
@@ -16,7 +17,6 @@ const profileSchema = z.object({
 });
 
 const createProfileSchema = z.object({
-	params: z.object({}),
 	body: profileSchema,
 });
 
@@ -31,7 +31,6 @@ const deleteProfileSchema = z.object({
 	params: z.object({
 		profileId: z.string(),
 	}),
-	body: z.object({}),
 });
 
 export { createProfileSchema, deleteProfileSchema, updateProfileSchema };

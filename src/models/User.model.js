@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 
 import Config from "#lib/config";
-import { UserRoles } from "#utils/enums.utils";
+import { UserRolesEnum } from "#utils/enums.utils";
 
 const userSchema = new mongoose.Schema(
 	{
@@ -33,8 +33,8 @@ const userSchema = new mongoose.Schema(
 		},
 		role: {
 			type: String,
-			enum: Object.values(UserRoles),
-			default: UserRoles.User,
+			enum: Object.values(UserRolesEnum),
+			default: UserRolesEnum.User,
 		},
 	},
 	{ timestamps: true }

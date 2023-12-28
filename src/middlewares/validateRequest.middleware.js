@@ -1,6 +1,6 @@
 import ApiError from "#lib/ApiError";
 
-const validateRequest = (schema) => {
+const validateRequestInput = (schema) => {
 	return async (req, res, next) => {
 		// Validating the input request data
 		const input = schema.safeParse({
@@ -26,4 +26,4 @@ const validateRequest = (schema) => {
 	};
 };
 
-export default validateRequest;
+export default validateRequestInput;

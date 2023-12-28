@@ -1,31 +1,31 @@
 import mongoose from "mongoose";
 
-const profileSchema = new mongoose.Schema(
+const addressSchema = new mongoose.Schema(
 	{
-		firstName: {
+		line1: {
 			type: String,
 			required: true,
 		},
-		lastName: {
+		line2: {
 			type: String,
 			required: true,
 		},
-		address: {
-			type: mongoose.Types.ObjectId,
-			ref: "Address",
-		},
-		phone: {
+		pincode: {
 			type: String,
 			required: true,
+		},
+		landmark: {
+			type: String,
 		},
 		user: {
 			type: mongoose.Types.ObjectId,
 			ref: "User",
+			required: true,
 		},
 	},
 	{ timestamps: true }
 );
 
-const Profile = mongoose.model("Profile", profileSchema);
+const Address = mongoose.model("Address", addressSchema);
 
-export default Profile;
+export default Address;

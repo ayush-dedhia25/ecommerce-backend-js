@@ -1,16 +1,15 @@
-import ApiError from "#lib/ApiError";
+import { ApiError } from "../errors/BaseError.js";
 
 const globalErrorHandler = (err, req, res, next) => {
 	// Handle ApiError
 	if (err instanceof ApiError) {
-		return res.status(err.statusCode).json(err.toJson());
+		return res.status(err.statusCode).json(err.toJSON());
 	}
 
 	// Handle miscellaneous errors
 	return res.status(err.statusCode || 500).json({
 		statusCode: err.statusCode || 500,
-		data: null,
-		message: err.message,
+		error: err.message,
 	});
 };
 

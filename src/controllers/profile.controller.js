@@ -1,15 +1,16 @@
-import { ApiError, ApiResponse, asyncHandler } from "#lib/index";
-import Address from "#models/Address.model";
-import Profile from "#models/Profile.model";
+import { InternalServerError } from "#errors/index";
+import { ApiResponse, asyncHandler } from "#lib/index";
+import { Address, Profile } from "#models/index";
 
-const getProfile = asyncHandler(async (req, res) => {
+export const getProfiles = asyncHandler(async (req, res) => {
 	const user = req.user;
-	const profile = await Profile.aggregate([{ $match: { user: user._id } }]);
-	return res.status(200).json(new ApiResponse(200, profile));
+	const profiles = await Profile.find({ user: user._id });
+	return res.status(200).json(new ApiResponse(200, profiles));
 });
 
-const createProfile = asyncHandler(async (req, res) => {
+export const createProfile = asyncHandler(async (req, res) => {
 	const { body } = req.parsedCtx;
+
 	// Get the current logged in user
 	const user = req.user;
 
@@ -36,23 +37,25 @@ const createProfile = asyncHandler(async (req, res) => {
 	return res.status(201).json(new ApiResponse(201, profile, "Profile created successfully"));
 });
 
-const updateProfile = asyncHandler(async (req, res) => {
+export const updateProfile = asyncHandler(async (req, res) => {
 	const { params, body } = req.parsedCtx;
-	const profile = await Profile.findByIdAndUpdate(
-		params.profileId,
-		{ $set: { ...body } },
-		{ new: true }
-	).select("-__v -updatedAt -createdAt");
+
+	const profile = await Profile.findByIdAndUpdate(params.profileId, body, { new: true }).select(
+		"-__v -updatedAt -createdAt"
+	);
+
 	return res.status(200).json(new ApiResponse(200, profile, "Profile updated successfully"));
 });
 
-const deleteProfile = asyncHandler(async (req, res) => {
+export const deleteProfile = asyncHandler(async (req, res) => {
 	const { params } = req.parsedCtx;
+
 	const profileToDelete = await Profile.deleteOne({ _id: params.profileId });
 	if (!profileToDelete.deletedCount) {
-		throw new ApiError(500, "Something went wrong while deleting profile, please try again");
+		throw new InternalServerError(
+			"Something went wrong while deleting profile, please try again"
+		);
 	}
+
 	return res.status(204).json();
 });
-
-export { createProfile, deleteProfile, getProfile, updateProfile };

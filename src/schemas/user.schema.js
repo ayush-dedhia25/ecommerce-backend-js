@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const createUserSchema = z.object({
+export const createUserSchema = z.object({
 	body: z.object({
 		username: z.string({ required_error: "Username must not be empty" }),
 		email: z
@@ -10,7 +10,7 @@ const createUserSchema = z.object({
 	}),
 });
 
-const updateUserSchema = z
+export const updateUserSchema = z
 	.object({
 		params: z.object({ id: z.string() }),
 		body: z.object({ username: z.string().optional(), email: z.string().optional() }),
@@ -19,8 +19,6 @@ const updateUserSchema = z
 		message: "Either username or email is required",
 	});
 
-const deleteUserSchema = z.object({
+export const deleteUserSchema = z.object({
 	params: z.object({ id: z.string() }),
 });
-
-export { createUserSchema, deleteUserSchema, updateUserSchema };

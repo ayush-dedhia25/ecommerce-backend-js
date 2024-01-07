@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const updateAddressSchema = z.object({
+export const updateAddressSchema = z.object({
 	params: z.object({
 		addressId: z.string(),
 	}),
@@ -12,10 +12,8 @@ const updateAddressSchema = z.object({
 	}),
 });
 
-const deleteAddressSchema = z.object({
+export const deleteAddressSchema = z.object({
 	params: z.object({
 		addressId: z.string(),
 	}),
 });
-
-export { deleteAddressSchema, updateAddressSchema };

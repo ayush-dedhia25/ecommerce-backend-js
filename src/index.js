@@ -8,7 +8,7 @@ import app from "./app.js";
 	// Start the server
 	const PORT = Config.App.Port;
 	app.listen(PORT, () => {
-		console.log(`🚀 Server up and running at http://localhost:${PORT}/`);
+		console.log(`🚀 API loaded and running at path http://localhost:${PORT}/api/v1`);
 	});
 
 	// Listen for any unhandled exceptions thrown by the server

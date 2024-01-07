@@ -1,20 +1,38 @@
-import { ApiError, ApiResponse, asyncHandler } from "../lib/index.js";
-import User from "../models/User.model.js";
-import { sanitizeUser } from "../utils/index.js";
+import { ConflictError, InternalServerError, NotFoundError } from "#errors/index";
+import { ApiResponse, asyncHandler } from "#lib/index";
+import { User } from "#models/index";
+import { sanitizeUser } from "#utils/index";
 
-const getAllUsers = asyncHandler(async (req, res) => {
+export const findUserOrThrowError = async ({ by, select = "" }) => {
+	let user = null;
+	if (by && typeof by === "string") {
+		const userId = by;
+		user = await User.findById(userId).select(select);
+	} else if (by && typeof by === "object") {
+		user = await User.findOne({ ...by }).select(select);
+	}
+
+	// Throw error if user is not found
+	if (!user) {
+		throw new NotFoundError("User not found");
+	}
+
+	return user;
+};
+
+export const getAllUsers = asyncHandler(async (req, res) => {
 	const users = await User.find().select("-password -salt -__v");
 	return res.status(200).json(new ApiResponse(200, users));
 });
 
-const createUser = asyncHandler(async (req, res) => {
+export const createUser = asyncHandler(async (req, res) => {
 	const { body } = req.parsedCtx;
 
 	// Check if the user already exists
 	let user = null;
 	user = await User.findOne({ email: body.email });
 	if (user) {
-		throw new ApiError(409, "User already exists");
+		throw new ConflictError("User already exists");
 	}
 
 	// Safe to create a new user
@@ -27,52 +45,39 @@ const createUser = asyncHandler(async (req, res) => {
 
 	return res
 		.status(201)
-		.json(
-			new ApiResponse(200, sanitizeUser(user), "User created successfully")
-		);
+		.json(new ApiResponse(200, sanitizeUser(user), "User created successfully"));
 });
 
-const updateUser = asyncHandler(async (req, res) => {
+export const updateUser = asyncHandler(async (req, res) => {
 	const { params, body } = req.parsedCtx;
 
 	// Check if the user already exists
-	let user = null;
-	user = await User.findById(params.id);
-	if (!user) {
-		throw new ApiError(404, "User does not exist");
-	}
+	const userExists = await findUserOrThrowError({ by: params.id });
 
 	// Update user
-	user = await User.findOneAndUpdate({ email: user.email }, body, {
+	const user = await User.findOneAndUpdate({ email: userExists.email }, body, {
 		new: true,
 	}).select("-password -salt -refreshToken -__v");
 
-	return res
-		.status(200)
-		.json(new ApiResponse(200, user, "User updated successfully"));
+	return res.status(200).json(new ApiResponse(200, user, "User updated successfully"));
 });
 
-const deleteUser = asyncHandler(async (req, res) => {
+export const deleteUser = asyncHandler(async (req, res) => {
 	const { params } = req.parsedCtx;
 
 	// Check if the user already exists
-	let user = await User.findById(params.id);
-	if (!user) {
-		throw new ApiError(404, "User does not exist");
-	}
+	const user = await findUserOrThrowError({ by: params.id });
 
 	// Delete the user from the database
 	const result = await User.deleteOne({ email: user.email });
 	if (!result.deletedCount) {
-		throw new ApiError(500, "Something went wrong while deleting the user");
+		throw new InternalServerError("Something went wrong while deleting the user");
 	}
 
 	// Return empty response i.e. with no content
 	return res.status(204).json();
 });
 
-const getActiveUser = asyncHandler((req, res) => {
+export const getActiveUser = asyncHandler((req, res) => {
 	return res.status(200).json(new ApiResponse(200, req.user));
 });
-
-export { createUser, deleteUser, getActiveUser, getAllUsers, updateUser };

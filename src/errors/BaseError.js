@@ -1,12 +1,17 @@
-class ApiError extends Error {
+export class ApiError extends Error {
 	#statusCode = 500;
 	#details = null;
 
-	constructor(statusCode, message, details = null) {
+	constructor(message, statusCode, details) {
 		super(message);
+
 		this.name = this.constructor.name;
+		this.message = message || "Something went wrong. Try again.";
 		this.#statusCode = statusCode || 500;
-		this.#details = details;
+		if (details) {
+			this.#details = details;
+		}
+
 		Error.captureStackTrace(this, this.constructor);
 	}
 
@@ -18,14 +23,12 @@ class ApiError extends Error {
 		return this.#details;
 	}
 
-	toJson() {
+	toJSON() {
 		return {
 			statusCode: this.#statusCode,
-			message: this.message,
-			success: false,
+			error: this.message,
 			...(this.#details ? { details: this.#details } : {}),
+			success: false,
 		};
 	}
 }
-
-export default ApiError;

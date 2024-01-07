@@ -3,7 +3,7 @@ import { Router } from "express";
 import {
 	createProfile,
 	deleteProfile,
-	getProfile,
+	getProfiles,
 	updateProfile,
 } from "#controllers/profile.controller";
 import { validateRequestInput, verifyJWT } from "#middlewares/index";
@@ -22,7 +22,7 @@ const router = Router();
 
 router
 	.route("/")
-	.get(verifyJWT, getProfile)
+	.get(verifyJWT, getProfiles)
 	.post(verifyJWT, validateRequestInput(createProfileSchema), createProfile);
 
 router

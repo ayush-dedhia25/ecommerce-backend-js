@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const profileSchema = z.object({
+export const profileSchema = z.object({
 	firstName: z.string({ required_error: "Please provide your first name" }).trim(),
 	lastName: z.string({ required_error: "Please provide your last name" }).trim(),
 	addressLine1: z.string({ required_error: "Please provide your address" }).trim(),
@@ -16,21 +16,19 @@ const profileSchema = z.object({
 		.refine((value) => /^\d{10}$/g.test(value), { message: "Invalid phone number" }),
 });
 
-const createProfileSchema = z.object({
+export const createProfileSchema = z.object({
 	body: profileSchema,
 });
 
-const updateProfileSchema = z.object({
+export const updateProfileSchema = z.object({
 	params: z.object({
 		profileId: z.string(),
 	}),
 	body: profileSchema.partial(),
 });
 
-const deleteProfileSchema = z.object({
+export const deleteProfileSchema = z.object({
 	params: z.object({
 		profileId: z.string(),
 	}),
 });
-
-export { createProfileSchema, deleteProfileSchema, updateProfileSchema };

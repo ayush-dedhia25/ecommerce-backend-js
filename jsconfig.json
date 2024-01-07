@@ -4,12 +4,13 @@
 		"paths": {
 			"#controllers/*": ["./src/controllers/*.js"],
 			"#error-handlers/*": ["./src/error-handlers/*.js"],
+			"#errors/*": ["./src/errors/*.js"],
 			"#lib/*": ["./src/lib/*.js"],
 			"#middlewares/*": ["./src/middlewares/*.js"],
 			"#models/*": ["./src/models/*.js"],
 			"#routes/*": ["./src/routes/*.js"],
-			"#utils/*": ["./src/utils/*.js"],
-			"#schemas/*": ["src/schemas/*.js"]
+			"#schemas/*": ["src/schemas/*.js"],
+			"#utils/*": ["./src/utils/*.js"]
 		}
 	},
 	"include": ["src"],

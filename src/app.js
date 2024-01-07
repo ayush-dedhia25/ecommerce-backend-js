@@ -19,10 +19,7 @@ app.get("/ping", (req, res) => {
 });
 
 import { globalErrorHandler, jwtErrorHandler } from "#error-handlers/index";
-import addressRoutes from "#routes/address.routes";
-import authRoutes from "#routes/auth.routes";
-import profileRoutes from "#routes/profile.routes";
-import userRoutes from "#routes/user.routes";
+import { addressRoutes, authRoutes, profileRoutes, userRoutes } from "#routes/index";
 
 // Routes
 app.use("/api/v1/auth", authRoutes);

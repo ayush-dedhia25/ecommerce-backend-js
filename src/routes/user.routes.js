@@ -2,7 +2,7 @@ import { Router } from "express";
 
 import { deleteUser, getActiveUser, getAllUsers, updateUser } from "#controllers/user.controller";
 import { validateRequestInput, verifyJWT } from "#middlewares/index";
-import { deleteUserSchema, updateUserSchema } from "#schemas/user.schema";
+import { deleteUserSchema, updateUserSchema } from "#schemas/index";
 
 /**
  * User Router

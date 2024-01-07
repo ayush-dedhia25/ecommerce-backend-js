@@ -7,11 +7,7 @@ import {
 	updateProfile,
 } from "#controllers/profile.controller";
 import { validateRequestInput, verifyJWT } from "#middlewares/index";
-import {
-	createProfileSchema,
-	deleteProfileSchema,
-	updateProfileSchema,
-} from "#schemas/profile.schema";
+import { createProfileSchema, deleteProfileSchema, updateProfileSchema } from "#schemas/index";
 
 /**
  * Profile Router.

@@ -1,8 +1,8 @@
 import { Router } from "express";
 
-import { deleteAddress, getAddresses, updateAddress } from "#controllers/Address.controller";
+import { deleteAddress, getAddresses, updateAddress } from "#controllers/address.controller";
 import { validateRequestInput, verifyJWT } from "#middlewares/index";
-import { deleteAddressSchema, updateAddressSchema } from "#schemas/address.schema";
+import { deleteAddressSchema, updateAddressSchema } from "#schemas/index";
 
 /**
  * Auth Router.

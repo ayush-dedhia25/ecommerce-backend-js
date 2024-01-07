@@ -19,13 +19,14 @@ app.get("/ping", (req, res) => {
 });
 
 import { globalErrorHandler, jwtErrorHandler } from "#error-handlers/index";
-import { addressRoutes, authRoutes, profileRoutes, userRoutes } from "#routes/index";
+import { addressRoutes, authRoutes, productRoutes, profileRoutes, userRoutes } from "#routes/index";
 
 // Routes
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/profile", profileRoutes);
 app.use("/api/v1/address", addressRoutes);
+app.use("/api/v1/products", productRoutes);
 
 // Register all the error handlers
 app.use(jwtErrorHandler); // Jwt specific error handler

@@ -1,7 +1,8 @@
-import Address from "./Address.model";
-import Order from "./Order.model";
-import Product from "./Product.model";
-import Profile from "./Profile.model";
-import User from "./User.model";
+import Address from "./Address.model.js";
+import Order from "./Order.model.js";
+import Product from "./Product.model.js";
+import Profile from "./Profile.model.js";
+import Review from "./Review.model.js";
+import User from "./User.model.js";
 
-export { Address, Order, Product, Profile, User };
+export { Address, Order, Product, Profile, Review, User };

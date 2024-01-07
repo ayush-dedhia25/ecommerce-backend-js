@@ -10,6 +10,10 @@ const productSchema = new mongoose.Schema(
 			type: String,
 			required: [true, "Please provide product's description"],
 		},
+		category: {
+			type: String,
+			required: [true, "Please provide product's category"],
+		},
 		price: {
 			type: String,
 			required: [true, "Please provide product's price"],
@@ -23,6 +27,16 @@ const productSchema = new mongoose.Schema(
 		},
 		rating: {
 			type: Number,
+		},
+		reviews: [
+			{
+				type: mongoose.Schema.Types.ObjectId,
+				ref: "Review",
+			},
+		],
+		creator: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: "User",
 		},
 	},
 	{ timestamps: true }

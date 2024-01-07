@@ -1,7 +1,8 @@
 import jwt from "jsonwebtoken";
 
-import { ApiError, asyncHandler, Config } from "#lib/index";
-import User from "#models/User.model";
+import { AuthorizationError } from "#errors/index";
+import { asyncHandler, Config } from "#lib/index";
+import { User } from "#models/index";
 
 const verifyJWT = asyncHandler(async (req, res, next) => {
 	try {
@@ -9,7 +10,7 @@ const verifyJWT = asyncHandler(async (req, res, next) => {
 		const token =
 			req.cookies?.access_token || req.header("Authorization")?.replace("Bearer ", "");
 		if (!token) {
-			throw new ApiError(401, "Unauthorized request");
+			throw new AuthorizationError("Unauthorized request");
 		}
 
 		// Decode the token and access the user info
@@ -20,7 +21,7 @@ const verifyJWT = asyncHandler(async (req, res, next) => {
 			"-password -refreshToken -salt -__v"
 		);
 		if (!user) {
-			throw new ApiError(401, "Invalid access token");
+			throw new AuthorizationError("Invalid access token");
 		}
 
 		// Attach the user to the request object

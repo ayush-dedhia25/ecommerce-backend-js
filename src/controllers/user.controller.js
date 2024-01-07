@@ -75,7 +75,7 @@ export const deleteUser = asyncHandler(async (req, res) => {
 	}
 
 	// Return empty response i.e. with no content
-	return res.status(204).json();
+	return res.status(204).end();
 });
 
 export const getActiveUser = asyncHandler((req, res) => {

@@ -1,6 +1,4 @@
-import { extractValidationErrors } from "./zod.util.js";
-
-const sanitizeUser = (user) => {
+export const sanitizeUser = (user) => {
 	if (Array.isArray(user)) {
 		return user.map((u) => u.sanitize());
 	} else {
@@ -8,4 +6,4 @@ const sanitizeUser = (user) => {
 	}
 };
 
-export { extractValidationErrors, sanitizeUser };
+export const selection = (select = "") => `${select} -__v -updatedAt`;

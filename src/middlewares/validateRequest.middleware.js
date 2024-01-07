@@ -1,4 +1,4 @@
-import ApiError from "#lib/ApiError";
+import { BadRequestError } from "#errors/index";
 
 const validateRequestInput = (schema) => {
 	return async (req, res, next) => {
@@ -16,7 +16,7 @@ const validateRequestInput = (schema) => {
 				return acc;
 			}, {});
 
-			const error = new ApiError(400, "Validation failed", details);
+			const error = new BadRequestError("Validation failed", details);
 			return res.status(error.statusCode).json(error.toJson());
 		}
 
